@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDP Calculator 📊</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #800080;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #660066;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>GDP Calculator 📈</h1>
+
+    <!-- Input Fields -->
+    <h2>Enter the following values:</h2>
+    <label for="consumption">Consumption (C):</label>
+    <input type="number" id="consumption" placeholder="Enter consumption value">
+
+    <label for="investment">Investment (I):</label>
+    <input type="number" id="investment" placeholder="Enter investment value">
+
+    <label for="government">Government Spending (G):</label>
+    <input type="number" id="government" placeholder="Enter government spending value">
+
+    <label for="exports">Exports (X):</label>
+    <input type="number" id="exports" placeholder="Enter exports value">
+
+    <label for="imports">Imports (M):</label>
+    <input type="number" id="imports" placeholder="Enter imports value">
+
+    <label for="indirectTaxes">Indirect Taxes:</label>
+    <input type="number" id="indirectTaxes" placeholder="Enter indirect taxes value">
+
+    <label for="subsidies">Subsidies:</label>
+    <input type="number" id="subsidies" placeholder="Enter subsidies value">
+
+    <label for="netFactorIncome">Net Factor Income from Abroad:</label>
+    <input type="number" id="netFactorIncome" placeholder="Enter net factor income value">
+
+    <label for="depreciation">Depreciation:</label>
+    <input type="number" id="depreciation" placeholder="Enter depreciation value">
+
+    <!-- Calculate Button -->
+    <button onclick="calculate()">Calculate GDP</button><br><br>
+
+    <!-- Result Display -->
+    <h2>Results:</h2>
+    <p>GDP at Market Price (GDPmp): <span id="gdpMarket"></span></p>
+    <p>GDP at Factor Cost (GDPfc): <span id="gdpFactor"></span></p>
+    <p>GNP at Market Price (GNPmp): <span id="gnpMarket"></span></p>
+    <p>GNP at Factor Cost (GNPfc): <span id="gnpFactor"></span></p>
+    <p>National Income (NI): <span id="nationalIncome"></span></p>
+
+    <!-- JavaScript Code -->
+    <script>
+        function calculate() {
+            // Input values
+            const consumption = parseFloat(document.getElementById('consumption').value);
+            const investment = parseFloat(document.getElementById('investment').value);
+            const government = parseFloat(document.getElementById('government').value);
+            const exports = parseFloat(document.getElementById('exports').value);
+            const imports = parseFloat(document.getElementById('imports').value);
+            const indirectTaxes = parseFloat(document.getElementById('indirectTaxes').value);
+            const subsidies = parseFloat(document.getElementById('subsidies').value);
+            const netFactorIncome = parseFloat(document.getElementById('netFactorIncome').value);
+            const depreciation = parseFloat(document.getElementById('depreciation').value);
+
+            // Calculate GDP at Market Price (GDPmp)
+            const gdpMarketPrice = consumption + investment + government + (exports - imports);
+            document.getElementById('gdpMarket').innerText = gdpMarketPrice.toFixed(2);
+
+            // Calculate GDP at Factor Cost (GDPfc)
+            const gdpFactorCost = gdpMarketPrice - indirectTaxes + subsidies;
+            document.getElementById('gdpFactor').innerText = gdpFactorCost.toFixed(2);
+
+            // Calculate GNP at Market Price (GNPmp)
+            const gnpMarketPrice = gdpMarketPrice + netFactorIncome;
+            document.getElementById('gnpMarket').innerText = gnpMarketPrice.toFixed(2);
+
+            // Calculate GNP at Factor Cost (GNPfc)
+            const gnpFactorCost = gnpMarketPrice - indirectTaxes + subsidies;
+            document.getElementById('gnpFactor').innerText = gnpFactorCost.toFixed(2);
+
+            // Calculate National Income (NI)
+            const nationalIncome = gnpFactorCost - depreciation;
+            document.getElementById('nationalIncome').innerText = nationalIncome.toFixed(2);
+        }
+    </script>
+</body>
+</html>
